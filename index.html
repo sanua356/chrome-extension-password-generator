@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор случайных паролей</title>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./checkboxes.css">
+</head>
+<body>
+    <div class="area">
+        <header>Генератор паролей</header>
+        <a href="./passwords.html"><img src="./images/memory2.png" alt="История сгенерированных паролей" id="passwordsHistory"></a>
+        <div class="area-password">
+            <label for="passwordField" class="labelText">Пароль</label>
+            <input type="text" class="field" id="passwordField">
+            <span id="copyBg"></span>
+            <span id="copyMessage" class="hide">Скопировано!</span>
+            <img src="../images/copy2.jpg" id="copyBtn" />
+        </div>
+        <div class="area-options">
+            <div class="container area-passwordLength">
+                <label for="passwordLengthBtn" class="labelText">Длина пароля</label>
+                <input type="range" id="passwordLengthBtn" min="1" max="50" value="8">  
+                <span id="passwordLengthIndicator">8</span>
+            </div>
+            <span class="labelText">Параметры </span>
+            <div class="options-params">
+                <div class="params-languages">
+                    <div class="container">
+                        <input type="checkbox" name="rusLang" id="russianLangBtn" class="param toggle-button">  
+                        <label for="russianLangBtn" class="text">Русские буквы</label>
+                    </div>
+                    <div class="container">
+                        <input type="checkbox" name="engLang" id="englishLangBtn" checked class="param toggle-button">  
+                        <label for="englishLangBtn" class="text">Английские буквы</label>
+                    </div>
+                    <div class="container">
+                        <input type="checkbox" name="numbers" id="numbersBtn" checked class="param toggle-button">  
+                        <label for="numbersBtn" class="text">Цифры</label>
+                    </div>
+                    <div class="container">
+                        <input type="checkbox" name="specialChars" id="specialCharsBtn" class="param toggle-button">  
+                        <label for="specialCharsBtn" class="text">Спецсимволы</label>
+                    </div>
+                    <div class="container">
+                        <input type="checkbox" name="specialChars" id="passwordFromMaskBtn" class="toggle-button">  
+                        <label for="specialCharsBtn" class="text">Пароль по маске</label>
+                    </div>
+                </div>
+            </div>
+            <div class="maskArea area-password hide">
+                <label for="maskField" class="labelText">Маска</label>
+                <input type="text" class="field" id="maskField" placeholder="Пример: TTttNSS">
+                <div class="maskParamsArea">
+                    <div class="column">
+                        <span><b>T</b> - Большая английская буква</span> 
+                        <span><b>t</b> - Маленькая английская буква</span>
+                        <span><b>R</b> - Большая русская буква</span>
+                    </div>
+                    <div class="column">
+                        <span><b>r</b> - Маленькая русская буква</span> 
+                        <span><b>N</b> - Цифра</span>
+                        <span><b>S</b> - Спецсимвол</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="generateBtn generatePasswordBtn">Сгенерировать</button>
+    </div>
+    <script defer type="text/javascript" src="./script.js"></script>
+</body>
+</html>

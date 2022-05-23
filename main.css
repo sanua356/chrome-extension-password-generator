@@ -1,0 +1,221 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.hide{
+    display: none !important;
+}
+.area{
+    position: relative;
+    width: 350px;
+    padding: 8px 13px;
+}
+header{
+    font-size: 22px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 5px;
+}
+#passwordsHistory{
+    position: absolute;
+    right: 15px;
+    top: 17px;
+    max-height: 18px;
+    opacity: 0.5;
+    transition: 0.2s ease-in-out opacity;
+}
+#passwordsHistory:hover{
+    opacity: 0.9;
+}
+
+.area-password{
+    position: relative;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.area-password img{
+    position: absolute;
+    right: 7px; 
+    bottom: 6px;
+    max-height: 20px;
+    opacity: 0.5;
+    transition: 0.2s ease-in-out all;
+    cursor: pointer;
+    padding: 0 3px;
+    z-index: 3;
+}
+#copyBg{
+    position: absolute;
+    right: 8px; 
+    bottom: 6px;
+    z-index: 2;
+    width: 28px;
+    height: 20px;
+    background-color: white;
+}
+#copyMessage{
+    position: absolute;
+    top: 5px; 
+    right: 0;
+}
+.area-password img:hover{
+    opacity: 1;
+}
+.labelText{
+    margin-bottom: 3px;
+    font-size: 18px;
+    font-weight: 500;
+}
+.field{
+    outline: none;
+    font-size: 16px;
+    padding: 5px 7px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    transition: 0.2s ease-in-out all;
+}
+.field:hover{
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.field:focus, .field:active{
+    border: 1px solid #0084FF;
+}
+.passwordNotEmpty{
+    border: 1px solid #0084FF !important;
+}
+.area-options{
+    margin-top: 15px;
+}
+.area-passwordLength{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+.area-passwordLength input{
+    margin: 0 5px;
+}
+#passwordLengthIndicator.disabled{
+    opacity: 0.5;
+}
+.options-params{
+    margin-top: 5px;
+}
+.params-languages{
+   display: flex;
+   flex-direction: column;
+}
+.params-languages > div{
+    margin: 5px 0;
+}
+.generateBtn{
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px 15px;
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    background-color: #0084FF;
+    transition: 0.1s ease-in-out all;
+}
+.generateBtn:hover{
+    background-color: #00AAFF;
+}
+.generateBtn:active{
+    background-color: #0066FF;
+}
+.maskParamsArea{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 16px;
+}
+.column{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.column span{
+    margin-top: 5px;
+}
+
+
+
+
+/*///////////// СТРАНИЦА ИСТОРИИ СГЕНЕРИРОВАННЫХ ПАЛОЛЕЙ*/
+.hint{
+    cursor: pointer;
+    padding: 7px 10px;
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    background-color: #0084FF;
+}
+.passwordsHistory{
+    max-height: 400px;
+    overflow-y: auto;
+}
+.icon{
+    cursor: pointer;
+    position: absolute;
+    opacity: 0.5;
+    transition: 0.2s ease-in-out opacity;
+}
+.icon:hover{
+    opacity: 0.9;
+}
+#undoImg{
+    right: 15px;
+    top: 45px;
+}
+#undoImg img{
+    max-height: 18px;
+}
+#trashCanImg{
+    right: 15px;
+    top: 17px;
+    max-height: 18px;
+}
+#passwordsHistoryTitle{
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+#passwordsHistorySubtitle{
+    font-size: 14px;
+}
+#passwordsHistoryTable{
+    width: 100%;
+    margin: 15px 0;
+    font-size: 15px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+#passwordsHistoryTable th:first-child, td:first-child{
+    border-right: 1px solid black;
+}
+#passwordsHistoryTable td{
+    border-bottom: 1px solid black;
+    max-width: fit-content;
+    word-break: break-all;
+}
+#passwordsHistoryTable td > button{
+    word-break: break-word;
+}
+#passwordsHistoryTable th, tr{
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+#passwordsHistoryTable th, td{
+    padding: 5px;
+}
