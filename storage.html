@@ -14,15 +14,15 @@
         <a href="./index.html" id="undoImg" class="icon"><img src="./images/undo2.png" alt="Назад к генератору" /></a>
         <header id="passwordsHistoryTitle">История сгенерированных паролей</header>
         <span id="passwordsHistorySubtitle">Здесь хранятся 100 последних сгенерированных паролей</span>
-        <table id="passwordsHistoryTable">
-            <tbody id="passwordsHistoryContent">
-                <tr>
-                    <th>Пароль</th>
-                    <th>Описание</th>
-                </tr>
-            </tbody>
-        </table>
-        <a href="./index.html"><button type="button" class="generateBtn">Назад к генератору</button></a>
+        <div id="passwordsHistoryTable">
+            <div id="passwordsHistoryContent">
+                <div class="passwordsHistoryTable-item passwordsHistoryTable-title">
+                    <p>Пароль</p>
+                    <p>Описание</p>
+                </div>
+            </div>
+        </div>
+        <a href="./index.html"><button type="button" id="backToGeneratorBtn" class="generateBtn">Назад к генератору</button></a>
     </div>
     <div class="modal modal__hide confirmModal">
         <div class="modal-area">

@@ -173,7 +173,6 @@ header{
 }
 .passwordsHistory{
     max-height: 400px;
-    overflow-y: auto;
 }
 .icon{
     cursor: pointer;
@@ -205,27 +204,50 @@ header{
 }
 #passwordsHistoryTable{
     width: 100%;
+    display: flex;
+    flex-direction: column;
     margin: 15px 0;
     font-size: 15px;
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    overflow-y: auto;
+    max-height: 50vh;
 }
-#passwordsHistoryTable th:first-child, td:first-child{
-    border-right: 1px solid black;
-}
-#passwordsHistoryTable td{
-    border-bottom: 1px solid black;
-    max-width: fit-content;
+.passwordsHistoryTable-item p{
+    display: flex;
+    align-items: center;
+    max-width: 49%;
     word-break: break-all;
+    padding: 0px 10px;
 }
-#passwordsHistoryTable td > button{
+.passwordsHistoryTable-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.passwordsHistoryTable-item img{
+    cursor: pointer;
+    max-width: 15px;
+    height: auto;
+    opacity: 0.5;
+    margin-left: 10px;
+    transition: 0.3s ease-in-out all;
+}
+.passwordsHistoryTable-item img:hover{
+    opacity: 0.9;
+}
+.gray-item{
+    background: rgba(0, 0, 0, 0.05)
+}
+.passwordsHistoryTable-title{
+    border-radius: 5px 5px 0px 0px;
+    background: #0084FF;
+    color: white;
+}
+
+#passwordsHistoryTable button{
     word-break: break-word;
 }
-#passwordsHistoryTable th, tr{
-    text-align: center;
-    border-bottom: 1px solid black;
-}
-#passwordsHistoryTable th, td{
-    padding: 5px;
+#backToGeneratorBtn{
+    margin-bottom: 15px;
 }

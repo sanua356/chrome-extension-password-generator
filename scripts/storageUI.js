@@ -7,23 +7,26 @@ window.addEventListener("load", async function () {
 });
 
 async function loadPasswords() {
-    table.innerHTML = "<tr><th>Пароль</th><th>Описание</th></tr>";
-    console.log(table);
+    table.innerHTML =
+        '<div class="passwordsHistoryTable-item passwordsHistoryTable-title"><p>Пароль</p><p>Описание</p></div>';
     const passwords = JSON.parse(await getStorageValue("passwordsHistory"));
     passwords.forEach(({ password, hint }, index) => {
         table.innerHTML += `
-        <tr><td>${password}</td><td>${
+        <div class="passwordsHistoryTable-item ${
+            index % 2 === 0 ? "gray-item" : ""
+        }"><p>${password}</p>
+        <p>${
             hint.length > 0
-                ? hint
-                : `<button class='hint' id='${index}'>Добавить описание</button>`
-        }</td></tr>`;
+                ? `${hint} <img src="./images/cancelation.png" class="deletePasswordBtn" />`
+                : `<img src="./images/contract.png" class="addHintPasswordBtn" id='${index}' /><img src="./images/cancelation.png" class="deletePasswordBtn" id='${index}' /></p></div>`
+        }`;
     });
 }
 
 //Обработка ситуации, когда пользователь хочет добавить описание к паролю
 const hintsBtns = document.querySelector("#passwordsHistoryContent");
-hintsBtns.addEventListener("click", function (e) {
-    if (e.srcElement.nodeName === "BUTTON") {
+hintsBtns.addEventListener("click", async function (e) {
+    if (e.srcElement.classList.contains("addHintPasswordBtn")) {
         inputValueModal("Введите описание для пароля", async function (value) {
             let passwords = JSON.parse(
                 await getStorageValue("passwordsHistory")
@@ -33,6 +36,12 @@ hintsBtns.addEventListener("click", function (e) {
                 passwordsHistory: JSON.stringify(passwords),
             }).then(loadPasswords);
         });
+    } else if (e.srcElement.classList.contains("deletePasswordBtn")) {
+        let passwords = JSON.parse(await getStorageValue("passwordsHistory"));
+        passwords.splice(e.srcElement.id, 1);
+        setStorageValue({
+            passwordsHistory: JSON.stringify(passwords),
+        }).then(loadPasswords);
     }
 });
 
