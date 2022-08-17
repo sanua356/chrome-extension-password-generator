@@ -12,5 +12,25 @@
   },
   "icons": {
     "128": "/images/logo.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "/scripts/mainFunctions.js",
+        "/scripts/background.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "/scripts/background.js"
   }
 }

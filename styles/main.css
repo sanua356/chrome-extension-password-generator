@@ -92,13 +92,23 @@ header{
 }
 .area-passwordLength{
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
     font-size: 18px;
 }
+.area-passwordLength label{
+    white-space: nowrap;
+    margin-right: 5px;
+}
 .area-passwordLength input{
     margin: 0 5px;
+    width: 100%;
+}
+.passwordLength-slider{
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 #passwordLengthIndicator.disabled{
     opacity: 0.5;

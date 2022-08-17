@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/modals.css">
     <title>Список сгенерированных паролей</title>
 </head>
 <body>
@@ -23,6 +24,20 @@
         </table>
         <a href="./index.html"><button type="button" class="generateBtn">Назад к генератору</button></a>
     </div>
-    <script defer type="text/javascript" src="./storage.js"></script>
+    <div class="modal modal__hide confirmModal">
+        <div class="modal-area">
+            <span class="modal-title confirmModal-title">Модальное окно подтверждения</span>
+            <div class="confirmModal-input">
+                <input type="text" class="confirmModal-inputValue hide" id="inputValue" placeholder="Вводите сюда..."/>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-buttons__confirm confirmModal-confirmBtn">Подтвердить</button>
+                <button class="modal-buttons__cancel confirmModal-cancelBtn">Отменить</button>
+            </div>
+        </div>
+    </div>
+    <script defer type="text/javascript" src="./scripts/mainFunctions.js"></script>
+    <script defer type="text/javascript" src="./scripts/modalsUI.js"></script>
+    <script defer type="text/javascript" src="./scripts/storageUI.js"></script>
 </body>
 </html>

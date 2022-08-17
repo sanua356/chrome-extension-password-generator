@@ -1,23 +1,3 @@
-//Константы генерации символов
-const englishAlphabetUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const englishAlphabetLower = "abcdefghijklmnopqrstuvwxyz";
-const russianAlphabetUpper = "АБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ";
-const russianAlphabetLower = "абвгдеёжзиклмнопрстуфхцчшщьыъэюя";
-const numbersAlphabet = "0123456789";
-const specialCharsAlphabet = "!@#$%^&*()-=_+.,";
-const assocAlphabets = {
-    rusLang: russianAlphabetUpper + russianAlphabetLower,
-    engLang: englishAlphabetUpper + englishAlphabetLower,
-    numbers: numbersAlphabet,
-    specialChars: specialCharsAlphabet,
-    T: englishAlphabetUpper,
-    t: englishAlphabetLower,
-    R: russianAlphabetUpper,
-    r: russianAlphabetLower,
-    N: numbersAlphabet,
-    S: specialCharsAlphabet,
-}; //Объект с ассоциациями: название параметра - алфавит
-
 //Получение элемента поля вывода пароля
 const inputPassword = document.querySelector("#passwordField");
 
@@ -38,9 +18,35 @@ inputPassword.addEventListener("input", function () {
         inputPassword.classList.remove("passwordNotEmpty");
     }
 });
+const generateParams = document.querySelectorAll(".param");
+//Сохранение параметов генерации пароля при клике на "checkboxы"
+generateParams.forEach((checkbox) => {
+    checkbox.addEventListener("click", function () {
+        let params = [];
+        generateParams.forEach((param) => {
+            if (param.checked) {
+                params.push(param.name);
+            }
+        });
+        setStorageValue({ params: JSON.stringify(params) });
+    });
+});
+
+//Подгрузка последних сохранённых параметров
+window.addEventListener("load", async function () {
+    const savedParams = JSON.parse(await getStorageValue("params"));
+    if (savedParams !== null) {
+        for (let i = 0; i < generateParams.length; i++) {
+            if (savedParams.includes(generateParams[i].name)) {
+                generateParams[i].checked = true;
+            } else {
+                generateParams[i].checked = false;
+            }
+        }
+    }
+});
 
 //Обработка клика по кнопке "Сгенерировать"
-const generateParams = document.querySelectorAll(".param");
 const generatePasswordBtn = document.querySelector(".generatePasswordBtn");
 
 generatePasswordBtn.addEventListener("click", function () {
@@ -56,11 +62,9 @@ generatePasswordBtn.addEventListener("click", function () {
                 params.push(element.name);
             }
         });
+        password = generatePassword(passwordLength, params);
 
-        //Генерация пароля
-        for (let i = 0; i < passwordLength; i++) {
-            password += String(generateRandomSymbol(params));
-        }
+        //Если выбран режим генерации по маске
     } else {
         const mask = maskValue.value;
         for (let i = 0; i < mask.length; i++) {
@@ -69,28 +73,10 @@ generatePasswordBtn.addEventListener("click", function () {
             );
         }
     }
-    inputPassword.value = password;
     if (password.length > 0) {
         inputPassword.classList.add("passwordNotEmpty");
-        //Сохранение пароля в хранилище
-        if (localStorage.getItem("passwordsHistory") !== null) {
-            let passwordsHistory = JSON.parse(
-                localStorage.getItem("passwordsHistory")
-            );
-            if (passwordsHistory.length >= 100) {
-                passwordsHistory.pop();
-            }
-            passwordsHistory = [{ password, hint: "" }, ...passwordsHistory];
-            localStorage.setItem(
-                "passwordsHistory",
-                JSON.stringify(passwordsHistory)
-            );
-        } else {
-            localStorage.setItem(
-                "passwordsHistory",
-                JSON.stringify([{ password, hint: "" }])
-            );
-        }
+        inputPassword.value = password;
+        savePassword(password);
     }
 });
 
@@ -122,18 +108,7 @@ const copyMessage = document.querySelector("#copyMessage");
 copyBtn.addEventListener("click", function () {
     if (inputPassword.value.length > 0) {
         inputPassword.select();
-        document.execCommand("copy");
+        copyToClipboard(inputPassword.value);
         copyMessage.classList.remove("hide");
     }
 });
-
-//Функция генерации пароля. Аргумент - массив опций генерации (опция - строка)
-function generateRandomSymbol(params) {
-    const randomParam = params[Math.floor(Math.random() * params.length)];
-    return generateSymbolInAlphabet(assocAlphabets[randomParam]);
-}
-
-//Функция получения случайного символа из алфавита, полученного как параметр
-function generateSymbolInAlphabet(alphabet) {
-    return alphabet[Math.floor(Math.random() * alphabet.length)];
-}

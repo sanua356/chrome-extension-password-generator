@@ -1,0 +1,73 @@
+.modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: rgba(0,0,0, 0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.modal__hide{
+    transform: scale(0);
+    opacity: 0;
+}
+.modal__hide > .modal-area{
+    transform: translateY(-30%);
+    opacity: 0;
+}
+.modal-area{
+    width: 80%;
+    min-height: 80%;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out all;
+}
+.modal-title{
+    font-size: 1.2rem;
+    text-align: center;
+    color: black;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 25px;
+}
+.confirmModal-input{
+    display: flex;
+    justify-content: center;
+}
+.confirmModal-input input{
+    outline: none;
+    width: 95%;
+    font-size: 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #0084FF;
+    margin-bottom: 20px;
+}
+.modal-buttons{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.modal-buttons button{
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    border: 1px solid;
+}
+.modal-buttons__confirm{
+    color: white;
+    background-color: #0084FF;
+}
+.modal-buttons__cancel{
+    color: #0084FF;
+background: white;
+border: 1px solid;
+}
