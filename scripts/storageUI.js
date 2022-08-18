@@ -7,21 +7,34 @@ window.addEventListener("load", async function () {
 });
 
 async function loadPasswords() {
-    table.innerHTML =
-        '<div class="passwordsHistoryTable-item passwordsHistoryTable-title"><p>Пароль</p><p>Описание</p></div>';
     const passwords = JSON.parse(await getStorageValue("passwordsHistory"));
-    passwords.forEach(({ password, hint }, index) => {
-        table.innerHTML += `
+    if (passwords.length > 0) {
+        table.innerHTML = `
+            <div class="passwordsHistoryTable-item passwordsHistoryTable-title">
+                <p>Пароль</p>
+                <p>Описание</p>
+            </div>`;
+
+        passwords.forEach(({ password, hint }, index) => {
+            table.innerHTML += `
         <div class="passwordsHistoryTable-item 
         ${index % 2 === 0 ? "gray-item" : ""}"><p>${password}</p>
-        <p>${
-            hint.length > 0
-                ? `${hint} <img src="./images/cancelation.png" class="deletePasswordBtn" />`
-                : `<img src="./images/contract.png" class="addHintPasswordBtn" id='${index}' />
-                <img src="./images/cancelation.png" class="deletePasswordBtn" id='${index}' />
-        </p></div>`
-        }`;
-    });
+            <p>${
+                hint.length > 0
+                    ? `${hint} <img src="./images/cancelation.png" class="deletePasswordBtn" />`
+                    : `<img src="./images/contract.png" class="addHintPasswordBtn" id='${index}' />
+                        <img src="./images/cancelation.png" class="deletePasswordBtn" id='${index}' />
+            </p>
+        </div>`
+            }`;
+        });
+    } else {
+        table.innerHTML = `
+            <div class="passwordsHistoryTable-noPasswords">
+                <img src="./images/nopasswords.png" />
+                <span>Вы не сгенерировали ещё ни одного пароля</span>
+            </div>`;
+    }
 }
 
 //Обработка ситуации, когда пользователь хочет добавить описание к паролю
@@ -52,9 +65,17 @@ hintsBtns.addEventListener("click", async function (e) {
 function reloadIDsList() {
     const deleteBtns = document.querySelectorAll(".deletePasswordBtn"),
         addHintBtns = document.querySelectorAll(".addHintPasswordBtn");
-    for (let i = 0; i < deleteBtns.length; i++) {
-        deleteBtns[i].id = i;
-        addHintBtns[i].id = i;
+    if (addHintBtns.length > 0) {
+        for (let i = 0; i < deleteBtns.length; i++) {
+            deleteBtns[i].id = i;
+            addHintBtns[i].id = i;
+        }
+    } else {
+        table.innerHTML = `
+            <div class="passwordsHistoryTable-noPasswords">
+                <img src="./images/nopasswords.png" />
+                <span>Вы не сгенерировали ещё ни одного пароля</span>
+            </div>`;
     }
 }
 

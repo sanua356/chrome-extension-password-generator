@@ -211,19 +211,34 @@ header{
     overflow-y: auto;
     max-height: 53vh;
 }
-.passwordsHistoryTable-item p{
+.passwordsHistoryTable-noPasswords{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    max-width: 49%;
-    word-break: break-all;
-    padding: 0px 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
 }
+.passwordsHistoryTable-noPasswords img{
+    max-width: 40%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
 .passwordsHistoryTable-item{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.passwordsHistoryTable-item p{
+    display: flex;
+    align-items: center;
+    max-width: 49%;
+    word-break: break-all;
+    padding: 0px 10px;
 }
 .passwordsHistoryTable-item:nth-child(2n + 1){
     background: rgba(0, 0, 0, 0.05)
