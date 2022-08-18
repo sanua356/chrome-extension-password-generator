@@ -209,7 +209,7 @@ header{
     margin: 15px 0;
     font-size: 15px;
     overflow-y: auto;
-    max-height: 50vh;
+    max-height: 53vh;
 }
 .passwordsHistoryTable-item p{
     display: flex;
@@ -225,6 +225,9 @@ header{
     padding: 10px;
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
+.passwordsHistoryTable-item:nth-child(2n + 1){
+    background: rgba(0, 0, 0, 0.05)
+}
 .passwordsHistoryTable-item img{
     cursor: pointer;
     max-width: 15px;
@@ -236,12 +239,9 @@ header{
 .passwordsHistoryTable-item img:hover{
     opacity: 0.9;
 }
-.gray-item{
-    background: rgba(0, 0, 0, 0.05)
-}
 .passwordsHistoryTable-title{
     border-radius: 5px 5px 0px 0px;
-    background: #0084FF;
+    background: #0084FF !important;
     color: white;
 }
 

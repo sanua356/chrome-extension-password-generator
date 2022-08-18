@@ -12,13 +12,14 @@ async function loadPasswords() {
     const passwords = JSON.parse(await getStorageValue("passwordsHistory"));
     passwords.forEach(({ password, hint }, index) => {
         table.innerHTML += `
-        <div class="passwordsHistoryTable-item ${
-            index % 2 === 0 ? "gray-item" : ""
-        }"><p>${password}</p>
+        <div class="passwordsHistoryTable-item 
+        ${index % 2 === 0 ? "gray-item" : ""}"><p>${password}</p>
         <p>${
             hint.length > 0
                 ? `${hint} <img src="./images/cancelation.png" class="deletePasswordBtn" />`
-                : `<img src="./images/contract.png" class="addHintPasswordBtn" id='${index}' /><img src="./images/cancelation.png" class="deletePasswordBtn" id='${index}' /></p></div>`
+                : `<img src="./images/contract.png" class="addHintPasswordBtn" id='${index}' />
+                <img src="./images/cancelation.png" class="deletePasswordBtn" id='${index}' />
+        </p></div>`
         }`;
     });
 }
@@ -41,9 +42,21 @@ hintsBtns.addEventListener("click", async function (e) {
         passwords.splice(e.srcElement.id, 1);
         setStorageValue({
             passwordsHistory: JSON.stringify(passwords),
-        }).then(loadPasswords);
+        });
+        hintsBtns.removeChild(hintsBtns.children[+e.srcElement.id + 1]);
+        reloadIDsList();
     }
 });
+
+//Перезагрузка всех ID после удаления пароля в середине или начале списка
+function reloadIDsList() {
+    const deleteBtns = document.querySelectorAll(".deletePasswordBtn"),
+        addHintBtns = document.querySelectorAll(".addHintPasswordBtn");
+    for (let i = 0; i < deleteBtns.length; i++) {
+        deleteBtns[i].id = i;
+        addHintBtns[i].id = i;
+    }
+}
 
 //Обработка нажатия по иконке "Удалить всю историю паролей"
 const deleteHistoryIcon = document.querySelector("#trashCanImg");
