@@ -8,6 +8,7 @@ window.addEventListener("load", async function () {
 
 async function loadPasswords() {
     const passwords = JSON.parse(await getStorageValue("passwordsHistory"));
+    const secretKey = await getStorageValue("secretKey");
     if (passwords.length > 0) {
         table.innerHTML = `
             <div class="passwordsHistoryTable-item passwordsHistoryTable-title">
@@ -18,7 +19,8 @@ async function loadPasswords() {
         passwords.forEach(({ password, hint }, index) => {
             table.innerHTML += `
         <div class="passwordsHistoryTable-item 
-        ${index % 2 === 0 ? "gray-item" : ""}"><p>${password}</p>
+        ${index % 2 === 0 ? "gray-item" : ""}">
+        <p>${decryptString(password, secretKey)}</p>
             <p>${
                 hint.length > 0
                     ? `${hint} <img src="./images/cancelation.png" class="deletePasswordBtn" />`

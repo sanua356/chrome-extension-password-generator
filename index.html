@@ -7,11 +7,17 @@
     <title>Генератор случайных паролей</title>
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/checkboxes.css">
+    <link rel="stylesheet" href="./styles/modals.css">
 </head>
 <body>
     <div class="area">
-        <header>Генератор паролей</header>
-        <a href="./storage.html"><img src="./images/memory2.png" alt="История сгенерированных паролей" id="passwordsHistory"></a>
+        <div class="header">
+            <header>Генератор паролей</header>
+            <div>
+                <a href="./storage.html"><img src="./images/memory2.png" alt="История сгенерированных паролей" id="passwordsHistory"></a>
+                <img src="./images/unlock.png" alt="Заблокировать расширение" id="lockExtension">
+            </div>
+        </div>
         <div class="area-password">
             <label for="passwordField" class="labelText">Пароль</label>
             <input type="text" class="field" id="passwordField">
@@ -70,8 +76,27 @@
             </div>
         </div>
         <button type="button" class="generateBtn generatePasswordBtn">Сгенерировать</button>
+        <div class="noSecretKeyArea hide">
+            <img src="./images/lock.png" alt="Генератор заблокирован">
+            <h3>Генерация паролей заблокирована</h3>
+            <p>Введите мастер-пароль для доступа к хранилищу паролей и генератору</p>
+        </div>
     </div>
+    <div class="modal modal__hide confirmModal">
+        <div class="modal-area">
+            <span class="modal-title confirmModal-title">Модальное окно подтверждения</span>
+            <div class="confirmModal-input">
+                <input type="text" class="confirmModal-inputValue hide" id="inputValue" placeholder="Вводите сюда..."/>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-buttons__confirm confirmModal-confirmBtn">Подтвердить</button>
+                <button class="modal-buttons__cancel confirmModal-cancelBtn">Отменить</button>
+            </div>
+        </div>
+    </div>
+    <script defer type="text/javascript" src="./libs/crypto-js.min.js"></script>
     <script defer type="text/javascript" src="./scripts/mainFunctions.js"></script>
+    <script defer type="text/javascript" src="./scripts/modalsUI.js"></script>
     <script defer type="text/javascript" src="./scripts/mainUI.js"></script>
 </body>
 </html>

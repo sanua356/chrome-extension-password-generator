@@ -23,6 +23,7 @@
     {
       "matches": ["<all_urls>"],
       "js": [
+        "/libs/crypto-js.min.js",
         "/scripts/mainFunctions.js",
         "/scripts/background.js"
       ],

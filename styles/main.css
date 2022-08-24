@@ -12,22 +12,34 @@
     width: 350px;
     padding: 8px 13px;
 }
-header{
+.header{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
     font-size: 22px;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding-bottom: 5px;
 }
-#passwordsHistory{
-    position: absolute;
-    right: 15px;
-    top: 17px;
+.header img{
+    cursor: pointer;
     max-height: 18px;
+    height: auto;
     opacity: 0.5;
-    transition: 0.2s ease-in-out opacity;
+    transition: 0.2s ease-in-out all;
 }
-#passwordsHistory:hover{
+.header a {
+    display: block;
+}
+.header > div{
+    width: 12vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.header img:hover{
     opacity: 0.9;
 }
 
@@ -174,32 +186,16 @@ header{
 .passwordsHistory{
     max-height: 400px;
 }
-.icon{
-    cursor: pointer;
-    position: absolute;
-    opacity: 0.5;
-    transition: 0.2s ease-in-out opacity;
-}
-.icon:hover{
-    opacity: 0.9;
-}
-#undoImg{
-    right: 15px;
-    top: 45px;
-}
-#undoImg img{
-    max-height: 18px;
-}
-#trashCanImg{
-    right: 15px;
-    top: 17px;
-    max-height: 18px;
+.passwordsHistory .header > div{
+    justify-content: flex-end;
 }
 #passwordsHistoryTitle{
     font-size: 20px;
-    margin-bottom: 15px;
 }
 #passwordsHistorySubtitle{
+    display: block;
+    text-align: center;
+    margin-top: 10px;
     font-size: 14px;
 }
 #passwordsHistoryTable{
@@ -265,4 +261,37 @@ header{
 }
 #backToGeneratorBtn{
     margin-bottom: 15px;
+}
+
+.noSecretKeyArea{
+    cursor: pointer;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: rgba(0,0,0, 0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    color: white;
+    padding: 0px 15px;
+    text-align: center;
+    z-index: 100;
+}
+
+.noSecretKeyArea img{
+    max-width: 50%;
+    height: auto;
+}
+.noSecretKeyArea p{
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+.noSecretKeyArea h3{
+    font-size: 1.1rem;
+    margin-bottom: 5px;
 }

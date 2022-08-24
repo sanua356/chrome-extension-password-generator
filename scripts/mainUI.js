@@ -1,3 +1,52 @@
+const noSecretKeyArea = document.querySelector(".noSecretKeyArea");
+
+noSecretKeyArea.addEventListener("click", function () {
+    inputValueModal(
+        "Введите мастер-пароль для доступа ко всем функциям",
+        async function (value) {
+            const decryptedKey = decryptString(
+                await getStorageValue("encryptedValidSecretKey"),
+                value
+            );
+            if (decryptedKey === checkValidSecretKey) {
+                noSecretKeyArea.classList.add("hide");
+                setStorageValue({ secretKey: value });
+            }
+        }
+    );
+});
+
+window.addEventListener("load", async function () {
+    const isFirstStart = await getStorageValue("isFirstStart");
+    if (isFirstStart === null) {
+        inputValueModal(
+            "Создайте мастер-пароль для защиты всех сгенерированных",
+            async function (value) {
+                setStorageValue({ isFirstStart: true });
+                setStorageValue({
+                    encryptedValidSecretKey: encryptString(
+                        checkValidSecretKey,
+                        value
+                    ),
+                });
+                setStorageValue({ secretKey: value });
+            }
+        );
+        return;
+    }
+    const secretKey = await getStorageValue("secretKey");
+    if (secretKey === null) {
+        noSecretKeyArea.classList.remove("hide");
+    }
+});
+
+//Получение элемента блокировки расширения (удаления секретного ключа из хранилища)
+const lockExtension = document.querySelector("#lockExtension");
+lockExtension.addEventListener("click", function () {
+    deleteStorageValue("secretKey");
+    noSecretKeyArea.classList.remove("hide");
+});
+
 //Получение элемента поля вывода пароля
 const inputPassword = document.querySelector("#passwordField");
 

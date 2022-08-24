@@ -10,9 +10,13 @@
 </head>
 <body>
     <div class="area passwordsHistory">
-        <img src="./images/trash.png" alt="Очистить всю историю" id="trashCanImg" class="icon" />
-        <a href="./index.html" id="undoImg" class="icon"><img src="./images/undo2.png" alt="Назад к генератору" /></a>
-        <header id="passwordsHistoryTitle">История сгенерированных паролей</header>
+        <div class="header">
+            <header id="passwordsHistoryTitle">История сгенерированных паролей</header>
+            <div>
+                <img src="./images/trash.png" alt="Очистить всю историю" id="trashCanImg" class="icon" />
+                <a href="./index.html" id="undoImg" class="icon"><img src="./images/undo2.png" alt="Назад к генератору" /></a>
+            </div>
+        </div>
         <span id="passwordsHistorySubtitle">Здесь хранятся 100 последних сгенерированных паролей</span>
         <div id="passwordsHistoryTable">
             <div id="passwordsHistoryContent">
@@ -36,6 +40,7 @@
             </div>
         </div>
     </div>
+    <script defer type="text/javascript" src="./libs/crypto-js.min.js"></script>
     <script defer type="text/javascript" src="./scripts/mainFunctions.js"></script>
     <script defer type="text/javascript" src="./scripts/modalsUI.js"></script>
     <script defer type="text/javascript" src="./scripts/storageUI.js"></script>

@@ -18,6 +18,9 @@ const assocAlphabets = {
     S: specialCharsAlphabet,
 }; //Объект с ассоциациями: название параметра - алфавит
 
+//Секретная фраза, по которой криптометоды будут проверять, валидный ли секретный ключ пользователя или нет
+const checkValidSecretKey = "DMi984829E02C25eQg84";
+
 //Функция генерации пароля. Аргумент - массив опций генерации (опция - строка)
 function generateRandomSymbol(params) {
     const randomParam = params[Math.floor(Math.random() * params.length)];
@@ -35,6 +38,14 @@ function generatePassword(length, params) {
         password += String(generateRandomSymbol(params));
     }
     return password;
+}
+
+function encryptString(str, key) {
+    return CryptoJS.AES.encrypt(str, key).toString();
+}
+function decryptString(str, key) {
+    const bytes = CryptoJS.AES.decrypt(str, key);
+    return bytes.toString(CryptoJS.enc.Utf8);
 }
 
 const getStorageValue = async function (key) {
@@ -63,6 +74,17 @@ const setStorageValue = async function (obj) {
         }
     });
 };
+const deleteStorageValue = async function (key) {
+    return new Promise((resolve, reject) => {
+        try {
+            chrome.storage.local.remove(key, function () {
+                resolve();
+            });
+        } catch (ex) {
+            reject(ex);
+        }
+    });
+};
 
 //Функция сохранения готового пароля в LocalStorage
 async function savePassword(password) {
@@ -74,6 +96,10 @@ async function savePassword(password) {
         if (passwordsHistory.length >= 100) {
             passwordsHistory.pop();
         }
+        password = CryptoJS.AES.encrypt(
+            password,
+            await getStorageValue("secretKey")
+        ).toString();
         passwordsHistory = [{ password, hint: "" }, ...passwordsHistory];
         setStorageValue({ passwordsHistory: JSON.stringify(passwordsHistory) });
     } else {

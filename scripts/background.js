@@ -5,9 +5,13 @@ try {
             "engLang",
             "numbers",
         ];
-        let password = generatePassword(passwordLength, params);
-        savePassword(password);
-        alertHotkeyedPassword(password);
+        if ((await getStorageValue("secretKey")) !== null) {
+            let password = generatePassword(passwordLength, params);
+            savePassword(password);
+            alertHotkeyedPassword(password);
+        } else {
+            alertHotkeyedPassword("", true);
+        }
     });
 } catch (e) {
     console.log("Password generator extension initializing error: " + e);
@@ -39,7 +43,7 @@ function runOnKeys(callback) {
 }
 
 //Показать пароль, который создан с помощью хоткеев на экране
-function alertHotkeyedPassword(password) {
+function alertHotkeyedPassword(password, isNotExistsSecretKey) {
     //Получаем время, чтобы id стилей случайно не совпал ни с каким элементом на странице
     const time = new Date().getTime();
     let style = document.createElement("style");
@@ -70,6 +74,9 @@ function alertHotkeyedPassword(password) {
     }
     `;
     notification.innerHTML = `Ваш пароль сгенерирован: ${password}`;
+    if (isNotExistsSecretKey) {
+        notification.innerHTML = `Для генерации по горячим клавишам введите мастер-пароль в расширении`;
+    }
     notification.classList.add(`passwordNotification_${time}`);
     setTimeout(() => {
         notification.classList.add(`passwordNotification_${time}__active`);
