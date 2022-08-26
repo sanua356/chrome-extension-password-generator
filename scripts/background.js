@@ -75,7 +75,7 @@ function alertHotkeyedPassword(password, isNotExistsSecretKey) {
     `;
     notification.innerHTML = `Ваш пароль сгенерирован: ${password}`;
     if (isNotExistsSecretKey) {
-        notification.innerHTML = `Для генерации по горячим клавишам введите мастер-пароль в расширении`;
+        notification.innerHTML = `Для генерации по горячим клавишам <br/> введите мастер-пароль в расширении`;
     }
     notification.classList.add(`passwordNotification_${time}`);
     setTimeout(() => {

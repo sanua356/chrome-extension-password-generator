@@ -43,6 +43,10 @@
     opacity: 0.9;
 }
 
+.area-header > div{
+    width: 20vw;
+}
+
 .area-password{
     position: relative;
     margin-top: 15px;

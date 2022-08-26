@@ -47,6 +47,43 @@ lockExtension.addEventListener("click", function () {
     noSecretKeyArea.classList.remove("hide");
 });
 
+const changeSecretKeyBtn = document.querySelector("#changeSecretKey");
+changeSecretKeyBtn.addEventListener("click", async function () {
+    const secretKey = await getStorageValue("secretKey");
+    const decryptedKey = decryptString(
+        await getStorageValue("encryptedValidSecretKey"),
+        secretKey
+    );
+    if (secretKey !== null && decryptedKey === checkValidSecretKey) {
+        inputValueModal(
+            "Введите в поле ниже новый мастер-пароль",
+            async function (value) {
+                let savedPasswords = JSON.parse(
+                    await getStorageValue("passwordsHistory")
+                );
+                for (let i = 0; i < savedPasswords.length; i++) {
+                    savedPasswords[i].password = encryptString(
+                        decryptString(savedPasswords[i].password, secretKey),
+                        value
+                    );
+                }
+                setStorageValue({
+                    passwordsHistory: JSON.stringify(savedPasswords),
+                });
+                setStorageValue({
+                    encryptedValidSecretKey: encryptString(
+                        checkValidSecretKey,
+                        value
+                    ),
+                });
+                setStorageValue({ secretKey: value });
+            }
+        );
+    } else {
+        lockExtension.classList.remove("hide");
+    }
+});
+
 //Получение элемента поля вывода пароля
 const inputPassword = document.querySelector("#passwordField");
 
